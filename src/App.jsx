@@ -27,7 +27,7 @@ function App() {
         }
         lista.sort((a,b)=>{return a.dados.total_pontos > b.dados.total_pontos ? -1: 1})
         setData(lista);});
-    },[]);
+    },[year]);
   console.log(year);
   console.log(data);
   return (
