@@ -42,11 +42,16 @@ function App() {
       .then(values=>{
         let partidas = values[values.length-1].partidas;
         let lista = [];
+        console.log(values)
         for(let i of partidas){
           lista.push({nome : i.mandante, info: i.pontuacao_geral_mandante});
           lista.push({nome : i.visitante, info: i.pontuacao_geral_visitante});
         }
-        lista.sort((a,b)=>{return a.info.total_pontos > b.info.total_pontos ? -1: 1})
+        lista.sort((a,b)=>{
+          return a.info.total_pontos > b.info.total_pontos ? -1 : a.info.total_pontos < b.info.total_pontos ? 1 :
+                 a.info.total_vitorias > b.info.total_vitorias ? -1 : a.info.total_vitorias < b.info.total_vitorias ? 1 :
+                 (a.info.total_gols_marcados - a.info.total_gols_sofridos) > (b.info.total_gols_marcados - b.info.total_gols_sofridos) ? -1 : (a.info.total_gols_marcados - a.info.total_gols_sofridos) < (b.info.total_gols_marcados - b.info.total_gols_sofridos) ? 1 :
+                 a.info.total_gols_marcados > b.info.total_gos_marcados ? -1 : 1})
         setData(lista);});
     },[year]);
 
